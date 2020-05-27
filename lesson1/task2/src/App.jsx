@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import Header from "./Header";
-import { user, UserContext } from "./user-context";
+import { UserContext } from "./user-context";
 
 class App extends Component {
     state = {
-        name: user.name,
-        avatar_url: user.avatar_url,
+        userData: {
+            name: "Nikola Tesla",
+            avatar_url: "https://avatars3.githubusercontent.com/u10001",
+        },
     };
+
     render() {
         return (
-            <div className="page">
-                <UserContext.Provider value={this.state}>
-                    <Header />
-                </UserContext.Provider>
-            </div>
+            <UserContext.Provider value={this.state.userData}>
+                <Header />
+            </UserContext.Provider>
         );
     }
 }
