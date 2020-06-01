@@ -1,17 +1,38 @@
+import { createSelector } from "reselect";
+
 export const optionsListSelector = (state) => {
     return state.options.optionsList;
 };
-
-export const selectedOptionsSelector = (state) => {
-    const allOptionsList = state.options.optionsList;
-    const selectedIds = state.options.selected;
-
-    return allOptionsList.filter((option) => selectedIds.includes(option.id));
+export const selectedIdsSelector = (state) => {
+    return state.options.selected;
 };
 
-export const avaibleOptionsSelecter = (state) => {
-    const allOptionsList = state.options.optionsList;
-    const selectedIds = state.options.selected;
+export const selectedOptionsSelector = createSelector(
+    [optionsListSelector, selectedIdsSelector],
+    (allOptionsList, selectedIds) => {
+        return allOptionsList.filter((option) =>
+            selectedIds.includes(option.id)
+        );
+    }
+);
+export const avaibleOptionsSelecter = createSelector(
+    [optionsListSelector, selectedIdsSelector],
+    (allOptionsList, selectedIds) => {
+        return allOptionsList.filter(
+            (option) => !selectedIds.includes(option.id)
+        );
+    }
+);
+// export const selectedOptionsSelector = (state) => {
+//     const allOptionsList = optionsListSelector(state);
+//     const selectedIds = selectedIdsSelector(state);
 
-    return allOptionsList.filter((option) => !selectedIds.includes(option.id));
-};
+//     return allOptionsList.filter((option) => selectedIds.includes(option.id));
+// };
+
+// export const avaibleOptionsSelecter = (state) => {
+//     const allOptionsList = optionsListSelector(state);
+//     const selectedIds = selectedIdsSelector(state);
+
+//     return allOptionsList.filter((option) => !selectedIds.includes(option.id));
+// };
