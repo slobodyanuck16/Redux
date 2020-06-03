@@ -1,15 +1,16 @@
 module.exports = {
-    parser: 'babel-eslint',
+    parser: "babel-eslint",
     env: {
         es6: true,
         node: true,
         jest: true,
         browser: true,
     },
-    extends: ['eslint:recommended'],
+    plugins: ["react-redux"],
+    extends: ["plugin:react-redux/recommended"],
     parserOptions: {
         ecmaVersion: 2018,
-        sourceType: 'module',
+        sourceType: "module",
     },
     rules: {},
 };
